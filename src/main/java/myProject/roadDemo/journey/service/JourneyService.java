@@ -2,11 +2,12 @@ package myProject.roadDemo.journey.service;
 
 import java.util.List;
 
-import myProject.roadDemo.dto.requests.CreateJourneyRequest;
-import myProject.roadDemo.dto.responses.GetAllJourneyResponse;
+import myProject.roadDemo.journey.entity.Journey;
+import myProject.roadDemo.journey.payload.request.CreateJourneyRequest;
+import myProject.roadDemo.journey.payload.response.GetAllJourneyResponse;
 
 public interface JourneyService {
-	void save(CreateJourneyRequest createJourneyRequest);
+	public Journey save(CreateJourneyRequest createJourneyRequest);
 	List<GetAllJourneyResponse> getAll();
 	//List<GetAllJourneyByUserId> getAllByUserId(int id);
 }

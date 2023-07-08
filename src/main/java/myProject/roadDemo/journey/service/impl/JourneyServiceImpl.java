@@ -3,46 +3,62 @@ package myProject.roadDemo.journey.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import myProject.roadDemo.journey.mapper.request.JourneyCreateRequestToJourneyMapper;
 import myProject.roadDemo.journey.service.JourneyService;
+import myProject.roadDemo.user.entity.User;
+import myProject.roadDemo.user.repository.UserRepository;
+import myProject.roadDemo.vehicle.entity.Vehicle;
+import myProject.roadDemo.vehicle.repository.ModelRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import myProject.roadDemo.core.utilities.mappers.ModelMapperService;
+import myProject.roadDemo.core.mappers.ModelMapperService;
 import myProject.roadDemo.journey.repo.JourneyRepository;
-import myProject.roadDemo.dto.requests.CreateJourneyRequest;
-import myProject.roadDemo.dto.responses.GetAllJourneyResponse;
+import myProject.roadDemo.journey.payload.request.CreateJourneyRequest;
+import myProject.roadDemo.journey.payload.response.GetAllJourneyResponse;
 import myProject.roadDemo.journey.entity.Journey;
 
 //@AllArgsConstructor
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class JourneyServiceImpl implements JourneyService {
 
 	private final ModelMapperService modelMapperService;
 	private final JourneyRepository journeyRepository;
+	private final UserRepository userRepository;
+	private final ModelRepository modelRepository;
 	
-
 	@Override
-	public void save(CreateJourneyRequest createJourneyRequest) {
-		
-		
-		
-		Journey journey = this.modelMapperService.forRequest().map(createJourneyRequest, Journey.class);
-		//calculateFuelCost(createJourneyRequest.getFuelConsumption(), createJourneyRequest.getRange());
-		//journey.setPay(calculateFuelCost(createJourneyRequest.getFuelConsumption(), createJourneyRequest.getRange()));
-		calculateFuelCostForJourney(journey,createJourneyRequest);
-		journeyRepository.save(journey);
-		
-	}
-		
-//	public Double calculateFuelCost(Double fuelConsumption, Double range) {
-//        Double fuelUsed = (fuelConsumption / 100) * range; 
-//        return fuelUsed * 25; 
-//    }
+	public Journey save(
+			CreateJourneyRequest request
+	) {
+		Journey journey = JourneyCreateRequestToJourneyMapper.toDto(request);
 
-	public void calculateFuelCostForJourney(Journey journey, CreateJourneyRequest request ){
-		Double fuelConsumption = request.getFuelConsumption();
-		Double range = request.getRange();
+		if(request.getUserId() != null){
+			User user = userRepository.findById(request.getUserId())
+					.orElseThrow(()-> new RuntimeException("User not found with given id: "
+					+request.getUserId()));
+			user.addJourney(journey);
+		}
+
+		if(request.getVehicleId() != null){
+			Vehicle vehicle =modelRepository.findById(request.getVehicleId())
+					.orElseThrow(()->new RuntimeException("Vehicle not found with given id: "
+							+ request.getVehicleId()));
+			vehicle.addJourney(journey);
+		}
+
+
+		calculateFuelCostForJourney(journey);
+
+
+		return journeyRepository.save(journey);
+	}
+
+
+	public void calculateFuelCostForJourney(Journey journey){
+		Double fuelConsumption = journey.getFuelConsumption();
+		Double range = journey.getRange();
 		Double fuelUsed = (fuelConsumption / 100) * range;
 		journey.setPay(fuelUsed*25);
 	}

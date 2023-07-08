@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import myProject.roadDemo.core.utilities.exceptions.BusinessException;
-import myProject.roadDemo.core.utilities.exceptions.ProblemDetails;
-import myProject.roadDemo.core.utilities.exceptions.ValidationProblemDetails;
+import myProject.roadDemo.core.exceptions.BusinessException;
+import myProject.roadDemo.core.exceptions.ProblemDetails;
+import myProject.roadDemo.core.exceptions.ValidationProblemDetails;
 
 @SpringBootApplication
 @RestControllerAdvice

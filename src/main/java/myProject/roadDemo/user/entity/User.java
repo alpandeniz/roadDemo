@@ -10,7 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import myProject.roadDemo.journey.entity.Journey;
-import myProject.roadDemo.entities.concretes.Model;
+import myProject.roadDemo.vehicle.entity.Vehicle;
 
 
 @Table(name="users")
@@ -36,7 +36,7 @@ public class User {
 			mappedBy = "users",
 			fetch = FetchType.LAZY
 	)
-	private List<Model> models;
+	private List<Vehicle> vehicles;
 
 	public void addJourney(Journey journey){
 		this.journeys.add(journey);

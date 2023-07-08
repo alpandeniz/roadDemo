@@ -3,17 +3,17 @@ package myProject.roadDemo.user.service.impl;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
-import myProject.roadDemo.business.rules.UserBusinessRules;
+import myProject.roadDemo.core.rules.UserBusinessRules;
 import myProject.roadDemo.journey.repo.JourneyRepository;
-import myProject.roadDemo.dataAccess.abstracts.ModelRepository;
-import myProject.roadDemo.entities.concretes.journeyMapper.JourneyMapper;
+import myProject.roadDemo.vehicle.repository.ModelRepository;
+import myProject.roadDemo.journey.mapper.JourneyMapper;
 import org.springframework.stereotype.Service;
 
 import myProject.roadDemo.user.service.UserService;
-import myProject.roadDemo.core.utilities.mappers.ModelMapperService;
-import myProject.roadDemo.user.repo.UserRepository;
-import myProject.roadDemo.dto.requests.CreateUserRequest;
-import myProject.roadDemo.dto.responses.GetAllJourneyByUserId;
+import myProject.roadDemo.core.mappers.ModelMapperService;
+import myProject.roadDemo.user.repository.UserRepository;
+import myProject.roadDemo.user.payload.request.CreateUserRequest;
+import myProject.roadDemo.journey.payload.response.GetAllJourneyByUserId;
 import myProject.roadDemo.journey.entity.Journey;
 import myProject.roadDemo.user.entity.User;
 

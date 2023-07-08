@@ -4,36 +4,48 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+import myProject.roadDemo.journey.entity.Journey;
+import myProject.roadDemo.journey.mapper.JourneyToJourneyDefaultResponseMapper;
+import myProject.roadDemo.journey.payload.response.JourneyDefaultResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
 import myProject.roadDemo.journey.service.JourneyService;
-import myProject.roadDemo.dto.requests.CreateJourneyRequest;
-import myProject.roadDemo.dto.responses.GetAllJourneyResponse;
+import myProject.roadDemo.journey.payload.request.CreateJourneyRequest;
+import myProject.roadDemo.journey.payload.response.GetAllJourneyResponse;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/journeys")
+@RequiredArgsConstructor
 public class JourneyController {
-	private JourneyService journeyService;
-	
+
+	private final JourneyService journeyService;
+
+
 	@PostMapping
-	@ResponseStatus(code=HttpStatus.CREATED)
-	public void add(@RequestBody @Valid CreateJourneyRequest createJourneyRequest) {
-		this.journeyService.save(createJourneyRequest);
+	public ResponseEntity<?> save(
+			@RequestBody @Valid CreateJourneyRequest request
+	) {
+
+		Journey journey = journeyService.save(request);
+		JourneyDefaultResponse response = JourneyToJourneyDefaultResponseMapper.toDto(journey);
+
+		return ResponseEntity.ok(response);
 	}
-	
+
+	/*
 	@GetMapping
 	public List<GetAllJourneyResponse> getAll(
 
 	){
 		return journeyService.getAll();
 	}
+
+	 */
 	
 }

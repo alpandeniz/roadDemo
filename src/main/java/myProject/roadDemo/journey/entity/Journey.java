@@ -3,14 +3,17 @@ package myProject.roadDemo.journey.entity;
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import myProject.roadDemo.user.entity.User;
+import myProject.roadDemo.vehicle.entity.Vehicle;
 
 import java.time.LocalDateTime;
 
 @Table(name="journeys")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -42,9 +45,18 @@ public class Journey {
 	@JoinColumn(name="user_id")
 	private User user;
 
+
+	@ManyToOne(
+			fetch = FetchType.LAZY
+	)
+	@JoinColumn(name = "vehicle_id")
+	private Vehicle vehicle;
+
 	@Override
 	public String toString(){
-		return "[" + id + ", " + journeyName + ", "+date+", "+range+", "+ fuelConsumption +", "+ pay +"]\n";
+		return "[" + id + ", " + journeyName +
+				", "+date+", "+range+", "+
+				fuelConsumption +", "+ pay +"]\n";
 	}
 
 	
