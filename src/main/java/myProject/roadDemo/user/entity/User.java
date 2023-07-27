@@ -33,7 +33,7 @@ public class User {
 	private List<Journey> journeys = new ArrayList<>();
 
 	@OneToMany(
-			mappedBy = "users",
+			mappedBy = "user",
 			fetch = FetchType.LAZY
 	)
 	private List<Vehicle> vehicles;

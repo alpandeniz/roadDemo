@@ -39,16 +39,16 @@ public class Vehicle {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User users;
+	private User user;
 
 	@OneToMany(
 			mappedBy = "vehicle",
 			fetch = FetchType.LAZY
 	)
-	private List<Journey> journeyList;
+	private List<Journey> journeys;
 
 	public void addJourney(Journey journey){
-		this.journeyList.add(journey);
+		this.journeys.add(journey);
 		journey.setVehicle(this);
 	}
 

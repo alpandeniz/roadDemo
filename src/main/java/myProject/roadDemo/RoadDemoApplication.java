@@ -46,9 +46,5 @@ public class RoadDemoApplication {
 		return problemDetails;
 	}
 
-	//Configuration sınıfı içerisinden gönderilmeli.
-	@Bean
-	public ModelMapper getModelMapper() {
-		return new ModelMapper();
-	}
+
 }

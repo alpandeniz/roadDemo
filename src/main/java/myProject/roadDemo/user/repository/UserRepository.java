@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import myProject.roadDemo.journey.entity.Journey;
 import myProject.roadDemo.user.entity.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	boolean existsByName(String name);
-	//List<Journey> findAllById(int id);
 	Optional<List<Journey>> findAllById(Integer id);
 
 

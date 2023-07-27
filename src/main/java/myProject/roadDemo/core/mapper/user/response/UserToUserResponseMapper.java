@@ -8,8 +8,6 @@ public class UserToUserResponseMapper {
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
-                //TODO******* BURADA KULLANICI ÜZERİNDEN MODEL ID ÇEKMEYE ÇALIŞTIM ANCAK OLMADI
-               // .modelId(user.getModels())
                 .build();
     }
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 import myProject.roadDemo.vehicle.payload.request.CreateModelRequest;
 import myProject.roadDemo.vehicle.payload.response.GetAllModelsResponse;
-import myProject.roadDemo.vehicle.payload.response.ModelResponse;
+import myProject.roadDemo.vehicle.payload.response.VehicleGetResponse;
 
 public interface ModelService {
 
-	ModelResponse save(CreateModelRequest createModelRequest) throws Exception;
+	VehicleGetResponse save(CreateModelRequest createModelRequest) throws Exception;
 
-	ModelResponse getModelById(Integer modelId);
+	VehicleGetResponse getModelById(Integer modelId);
 
 	List<GetAllModelsResponse> getAll();
 
-	ModelResponse updateModelById(Integer modelId);
+	VehicleGetResponse updateModelById(Integer modelId);
 
 	boolean deleteModelById(Integer modelId);
 

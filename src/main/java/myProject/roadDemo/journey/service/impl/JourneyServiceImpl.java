@@ -8,7 +8,7 @@ import myProject.roadDemo.journey.service.JourneyService;
 import myProject.roadDemo.user.entity.User;
 import myProject.roadDemo.user.repository.UserRepository;
 import myProject.roadDemo.vehicle.entity.Vehicle;
-import myProject.roadDemo.vehicle.repository.ModelRepository;
+import myProject.roadDemo.vehicle.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class JourneyServiceImpl implements JourneyService {
 	private final ModelMapperService modelMapperService;
 	private final JourneyRepository journeyRepository;
 	private final UserRepository userRepository;
-	private final ModelRepository modelRepository;
+	private final VehicleRepository vehicleRepository;
 	
 	@Override
 	public Journey save(
@@ -42,7 +42,7 @@ public class JourneyServiceImpl implements JourneyService {
 		}
 
 		if(request.getVehicleId() != null){
-			Vehicle vehicle =modelRepository.findById(request.getVehicleId())
+			Vehicle vehicle = vehicleRepository.findById(request.getVehicleId())
 					.orElseThrow(()->new RuntimeException("Vehicle not found with given id: "
 							+ request.getVehicleId()));
 			vehicle.addJourney(journey);

@@ -12,7 +12,7 @@ import myProject.roadDemo.vehicle.entity.Brand;
 
 @Service
 @AllArgsConstructor
-public class BrandManager implements BrandService {
+public class BrandServiceImpl implements BrandService {
 	private final BrandRepository brandRepository;
 	private final ModelMapperService modelMapperService;
 	private final BrandBusinessRules brandBusinessRules;

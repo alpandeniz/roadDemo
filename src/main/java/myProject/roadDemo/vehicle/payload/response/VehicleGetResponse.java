@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ModelResponse {
+public class VehicleGetResponse {
     private Integer id;
     private String name;
     private String brandName;
+    private String userName;
 }

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
     private Integer id;
     private String name;
-   // private Integer modelId;
+    private Integer modelName;
+    private Integer journeyId;
 
 }
